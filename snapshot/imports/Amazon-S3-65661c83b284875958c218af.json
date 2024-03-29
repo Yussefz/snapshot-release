@@ -1,0 +1,18 @@
+{
+  "_id": "65661c83b284875958c218af",
+  "name": "Amazon S3",
+  "_connectionId": "5e8e173bb2430a08d886a600",
+  "apiIdentifier": "if5734f8cb",
+  "oneToMany": false,
+  "file": {
+    "fileName": "year={{dateFormat \"YYYY\" date}}/month={{dateFormat \"MM\" date}}/file-{{timestamp \"DD-MONTH-YYYY hh:mm:ss\" \"America/Chicago\"}}.json",
+    "skipAggregation": false,
+    "type": "json"
+  },
+  "s3": {
+    "region": "us-east-1",
+    "bucket": "labs2",
+    "fileKey": "year={{dateFormat \"YYYY\" date}}/month={{dateFormat \"MM\" date}}/file-{{timestamp \"DD-MONTH-YYYY hh:mm:ss\" \"America/Chicago\"}}.json"
+  },
+  "adaptorType": "S3Import"
+}
