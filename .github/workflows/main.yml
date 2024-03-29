@@ -37,5 +37,7 @@ jobs:
         git add .
         git commit -m "Add new snapshot"
         # Including the PAT in the repository URL for authentication
+        echo "Setting remote URL with PAT..."
         git remote set-url origin https://x-access-token:${REPO_ACCESS_TOKEN}@github.com/Yussefz/snapshot-release.git
+        echo "Attempting to push to the repository..."
         git push --set-upstream origin new-branch-${{ github.event.client_payload.id }}   
