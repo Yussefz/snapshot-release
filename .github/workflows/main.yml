@@ -1,0 +1,28 @@
+name: S3 Snapshot Workflow
+
+on:
+  repository_dispatch:
+    types: [snapshot-event]
+jobs:
+  process-snapshot:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Download Snapshot from S3
+      run: |
+        curl -o snapshot.zip "${{ github.event.client_payload.signedURL }}
+
+    - name: Unzip Snapshot
+      run: unzip snapshot.zip -d snapshot
+
+    - name: Create New Branch
+      run: |
+        git checkout -b new-branch-${{ github.event.client_payload.id }}
+        git add .
+        git config --global user.email "you.zouhairi@gmail.com"
+        git config --global user.name "YussefZ"
+        git commit -m "Add new snapshot"
+        git push origin new-branch-${{ github.event.client_payload.id }}
+    
