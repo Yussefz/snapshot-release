@@ -16,7 +16,16 @@ jobs:
 
     - name: Unzip Snapshot
       run: unzip snapshot.zip -d snapshot
-
+      
+    - name: Debug Environment Variables
+      run: |
+        echo "Checking if environment variables are set..."
+        if [ -z "${REPO_ACCESS_TOKEN}" ]; then
+          echo "REPO_ACCESS_TOKEN is not set."
+        else
+          echo "REPO_ACCESS_TOKEN is set."
+        fi
+        
     - name: Create New Branch
       run: |
         git checkout -b new-branch-${{ github.event.client_payload.id }}
