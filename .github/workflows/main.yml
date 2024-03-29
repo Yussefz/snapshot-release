@@ -17,6 +17,11 @@ jobs:
 
     - name: Unzip Snapshot
       run: unzip snapshot.zip -d snapshot
+      
+    - name: Clean up existing zip files
+      run: |
+          echo "Removing existing zip files..."
+          rm -f *.zip || true  # The || true ensures that this command doesn't fail the workflow if no zip files are found
         
     - name: Create New Branch and Push
       env:
