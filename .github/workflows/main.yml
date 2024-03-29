@@ -48,7 +48,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
-        gh auth login --with-token <<< "$GITHUB_TOKEN"
         gh pr create --base main --head new-branch-${{ github.event.client_payload.id }} --title "Merge new snapshot" --body "Automated snapshot merge"
 
     - name: Auto-Merge Pull Request
