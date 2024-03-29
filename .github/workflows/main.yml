@@ -12,7 +12,7 @@ jobs:
 
     - name: Download Snapshot from S3
       run: |
-        curl -o snapshot.zip "${{ github.event.client_payload.signedURL }}
+        curl -o snapshot.zip '${{ github.event.client_payload.signedURL }}'
 
     - name: Unzip Snapshot
       run: unzip snapshot.zip -d snapshot
