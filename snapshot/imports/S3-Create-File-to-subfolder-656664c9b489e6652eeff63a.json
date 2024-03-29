@@ -1,0 +1,48 @@
+{
+  "_id": "656664c9b489e6652eeff63a",
+  "name": "S3 - Create File to subfolder",
+  "_connectionId": "5e8e173bb2430a08d886a600",
+  "distributed": false,
+  "apiIdentifier": "ie719764d3",
+  "oneToMany": false,
+  "mapping": {
+    "fields": [
+      {
+        "extract": "[Base Price]",
+        "generate": "Price"
+      },
+      {
+        "generate": "method",
+        "hardCodedValue": "test"
+      },
+      {
+        "extract": "[Display Name]",
+        "generate": "name"
+      },
+      {
+        "extract": "id",
+        "generate": "id"
+      }
+    ]
+  },
+  "file": {
+    "fileName": "year={{dateFormat \"YYYY\" date}}/month={{dateFormat \"MM\" date}}/NetSuite_Export-{{timestamp \"DD-MONTH-YYYY hh:mm:ss\" \"America/Chicago\"}}.csv",
+    "skipAggregation": false,
+    "type": "csv",
+    "csv": {
+      "rowDelimiter": "\n",
+      "columnDelimiter": ",",
+      "includeHeader": true,
+      "wrapWithQuotes": false,
+      "replaceTabWithSpace": false,
+      "replaceNewlineWithSpace": false,
+      "truncateLastRowDelimiter": false
+    }
+  },
+  "s3": {
+    "region": "us-east-1",
+    "bucket": "labs2",
+    "fileKey": "year={{dateFormat \"YYYY\" date}}/month={{dateFormat \"MM\" date}}/NetSuite_Export-{{timestamp \"DD-MONTH-YYYY hh:mm:ss\" \"America/Chicago\"}}.csv"
+  },
+  "adaptorType": "S3Import"
+}
