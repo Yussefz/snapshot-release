@@ -1,0 +1,9 @@
+{
+  "_id": "64e8f94e87c6887c72ad47bb",
+  "type": "netsuite",
+  "name": "NetSuite - Celigo Labs",
+  "netsuite": {
+    "wsdlVersion": "2018.1",
+    "concurrencyLevel": 10
+  }
+}
