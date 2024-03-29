@@ -36,7 +36,6 @@ jobs:
         git checkout -b new-branch-${{ github.event.client_payload.id }}
         git add .
         git commit -m "Add new snapshot"
-        git remote add origin https://github.com/Yussefz/snapshot-release.git
         # Including the PAT in the repository URL for authentication
         git remote set-url origin https://x-access-token:${REPO_ACCESS_TOKEN}@github.com/Yussefz/snapshot-release.git
         git push --set-upstream origin new-branch-${{ github.event.client_payload.id }}   
