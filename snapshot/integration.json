@@ -1,0 +1,18 @@
+{
+  "_id": "5f7e39a76bb8d813180a9549",
+  "name": "Amazon S3",
+  "install": [],
+  "installSteps": [],
+  "uninstallSteps": [],
+  "changeEditionSteps": [],
+  "flowGroupings": [
+    {
+      "name": "NetSuite",
+      "_id": "6467c5d5b72b624632c12c5a"
+    },
+    {
+      "name": "Salesforce",
+      "_id": "6467c5f3166786653a0eb71f"
+    }
+  ]
+}
