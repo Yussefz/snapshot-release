@@ -1,0 +1,26 @@
+{
+  "_id": "5f80d43a23c33b7cec9d665a",
+  "name": "SF - Import Demo Data",
+  "_connectionId": "5c9e57a70138bb22695ce8a6",
+  "distributed": false,
+  "apiIdentifier": "i352319cee",
+  "mapping": {
+    "fields": [
+      {
+        "extract": "Date",
+        "generate": "CloseDate"
+      },
+      {
+        "extract": "ID",
+        "generate": "Name"
+      }
+    ]
+  },
+  "salesforce": {
+    "operation": "insert",
+    "sObjectType": "Opportunity",
+    "api": "soap",
+    "removeNonSubmittableFields": false
+  },
+  "adaptorType": "SalesforceImport"
+}
