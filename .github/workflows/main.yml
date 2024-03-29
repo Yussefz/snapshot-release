@@ -35,4 +35,30 @@ jobs:
         echo "Setting remote URL with PAT..."
         git remote set-url origin https://x-access-token:${REPO_ACCESS_TOKEN}@github.com/Yussefz/snapshot-release.git
         echo "Attempting to push to the repository..."
-        git push --set-upstream origin new-branch-${{ github.event.client_payload.id }}   
+        git push --set-upstream origin new-branch-${{ github.event.client_payload.id }}  
+        
+    - name: Install GitHub CLI
+      run: |
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+        sudo apt update
+        sudo apt install gh
+
+    - name: Create Pull Request
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+      run: |
+        gh auth login --with-token <<< "$GITHUB_TOKEN"
+        gh pr create --base main --head new-branch-${{ github.event.client_payload.id }} --title "Merge new snapshot" --body "Automated snapshot merge"
+
+    - name: Auto-Merge Pull Request
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+      run: |
+        PR_NUMBER=$(gh pr list --base main --head new-branch-${{ github.event.client_payload.id }} --json number --jq '.[0].number')
+        if [ ! -z "$PR_NUMBER" ]; then
+          gh pr merge "$PR_NUMBER" --auto --merge
+        else
+          echo "PR not found or cannot be merged automatically."
+        fi
+
