@@ -6,7 +6,6 @@ on:
 jobs:
   process-snapshot:
     runs-on: ubuntu-latest
-    environment: test
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
