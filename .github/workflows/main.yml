@@ -15,7 +15,7 @@ jobs:
         curl -o snapshot.zip '${{ github.event.client_payload.signedURL }}'
 
     - name: Unzip Snapshot
-      run: unzip snapshot.zip -d snapshot
+      run: unzip -o snapshot.zip -d snapshot
       
     - name: Clean up existing zip files
       run: |
