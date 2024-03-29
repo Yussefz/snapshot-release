@@ -20,7 +20,7 @@ jobs:
     - name: Debug Environment Variables
       run: |
         echo "Checking if environment variables are set..."
-        if [ -z "${secrets.REPO_ACCESS_TOKEN}" ]; then
+        if [ -z "${REPO_ACCESS_TOKEN}" ]; then
           echo "REPO_ACCESS_TOKEN is not set."
         else
           echo "REPO_ACCESS_TOKEN is set."
