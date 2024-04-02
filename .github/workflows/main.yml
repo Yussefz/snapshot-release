@@ -26,9 +26,10 @@ jobs:
       env:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
+        TIMESTAMP=$(date +"%m%d%Y%H%M")
         git config --global user.email "you.zouhairi@gmail.com"
         git config --global user.name "YussefZ"
-        git checkout -b new-branch-${{ github.event.client_payload.id }}
+        git checkout -b new-branch-${{ github.event.client_payload.id }}-${TIMESTAMP}
         git add .
         git commit -m "Add new snapshot"
         # Including the PAT in the repository URL for authentication
