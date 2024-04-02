@@ -44,6 +44,18 @@ jobs:
         sudo apt update
         sudo apt install gh
 
+    - name: Delete Snapshot Directory from Main Branch
+      env:
+        REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+      run: |
+        echo "Switching to main branch..."
+        git checkout main
+        echo "Deleting snapshot directory..."
+        git rm -r snapshot
+        git commit -m "Remove snapshot directory"
+        echo "Pushing changes to main branch..."
+        git push origin main
+
     - name: Create Pull Request
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
