@@ -1,0 +1,29 @@
+{
+  "_id": "5f8489c923c33b7ceca1ebb4",
+  "name": "NS - DEMO - Export Data",
+  "_connectionId": "5c9e3fcab6c32736c8eaf713",
+  "apiIdentifier": "e0e03a1389",
+  "asynchronous": true,
+  "type": "test",
+  "test": {
+    "limit": 1
+  },
+  "netsuite": {
+    "type": "restlet",
+    "skipGrouping": true,
+    "statsOnly": false,
+    "restlet": {
+      "criteria": [],
+      "columns": [],
+      "recordType": "item",
+      "searchId": "163",
+      "useSS2Restlets": false,
+      "restletVersion": "suitebundle"
+    },
+    "distributed": {
+      "executionContext": [],
+      "executionType": []
+    }
+  },
+  "adaptorType": "NetSuiteExport"
+}
