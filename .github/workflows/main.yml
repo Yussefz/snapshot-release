@@ -26,17 +26,16 @@ jobs:
       env:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
-        TIMESTAMP=$(date +"%m%d%Y%H%M")
         git config --global user.email "you.zouhairi@gmail.com"
         git config --global user.name "YussefZ"
-        git checkout -b new-branch-${{ github.event.client_payload.id }}-${TIMESTAMP}
+        git checkout -b new-branch-${{ github.event.client_payload.id }}
         git add .
         git commit -m "Add new snapshot"
         # Including the PAT in the repository URL for authentication
         echo "Setting remote URL with PAT..."
         git remote set-url origin https://x-access-token:${REPO_ACCESS_TOKEN}@github.com/Yussefz/snapshot-release.git
         echo "Attempting to push to the repository..."
-        git push --set-upstream origin new-branch-${{ github.event.client_payload.id }}-${TIMESTAMP}  
+        git push --set-upstream origin new-branch-${{ github.event.client_payload.id }}  
         
     - name: Install GitHub CLI
       run: |
@@ -49,13 +48,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
-        gh pr create --base main --head new-branch-${{ github.event.client_payload.id }}-${TIMESTAMP} --title "Merge new snapshot" --body "Automated snapshot merge"
+        gh pr create --base main --head new-branch-${{ github.event.client_payload.id }} --title "Merge new snapshot" --body "Automated snapshot merge"
 
     - name: Auto-Merge Pull Request
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
-        PR_NUMBER=$(gh pr list --base main --head new-branch-${{ github.event.client_payload.id }}-${TIMESTAMP} --json number --jq '.[0].number')
+        PR_NUMBER=$(gh pr list --base main --head new-branch-${{ github.event.client_payload.id }} --json number --jq '.[0].number')
         if [ ! -z "$PR_NUMBER" ]; then
           gh pr merge "$PR_NUMBER" --auto --merge
         else
