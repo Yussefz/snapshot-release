@@ -65,8 +65,14 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
-        PR_NUMBER=$(gh pr list --base main --head new-branch-${{ github.event.client_payload.id }} --json number --jq '.[0].number')
+        set -x  # Enable debugging
+        PR_LIST_JSON=$(gh pr list --base main --head new-branch-${{ github.event.client_payload.id }} --json number)
+        echo "PR List JSON: $PR_LIST_JSON"
+        PR_NUMBER=$(echo "$PR_LIST_JSON" | jq -r '.[0].number')
+        echo "PR Number: $PR_NUMBER"
         if [ ! -z "$PR_NUMBER" ]; then
           gh pr merge "$PR_NUMBER" --auto --merge
         else
           echo "PR not found or cannot be merged automatically."
+        set +x  # Disable debugging
+
