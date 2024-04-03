@@ -61,7 +61,7 @@ jobs:
       run: |
         gh pr create --base main --head new-branch-${{ github.event.client_payload.id }} --title "Merge new snapshot" --body "Automated snapshot merge"
 
-    - name: Auto-Merge Pull Request
+    - name: Auto-Merge Pull Request and Delete Branch
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
@@ -72,10 +72,13 @@ jobs:
         echo "PR Number: $PR_NUMBER"
         if [ ! -z "$PR_NUMBER" ]; then
           gh pr merge "$PR_NUMBER" --auto --merge
+          echo "PR merged successfully, deleting the branch..."
+          gh pr delete "$PR_NUMBER" --repo Yussefz/snapshot-release --force
         else
           echo "PR not found or cannot be merged automatically."
         fi
         echo "After conditional block"
+
 
 
 
