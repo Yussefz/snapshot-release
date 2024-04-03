@@ -73,11 +73,12 @@ jobs:
         if [ ! -z "$PR_NUMBER" ]; then
           gh pr merge "$PR_NUMBER" --auto --merge
           echo "PR merged successfully, deleting the branch..."
-          gh pr delete "$PR_NUMBER" --repo Yussefz/snapshot-release --force
+          git push origin --delete new-branch-${{ github.event.client_payload.id }}
         else
           echo "PR not found or cannot be merged automatically."
         fi
         echo "After conditional block"
+
 
 
 
