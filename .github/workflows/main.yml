@@ -74,5 +74,8 @@ jobs:
           gh pr merge "$PR_NUMBER" --auto --merge
         else
           echo "PR not found or cannot be merged automatically."
-        set +x  # Disable debugging
+        fi
+        echo "After conditional block"
+
+
 
