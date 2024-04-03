@@ -15,23 +15,34 @@ jobs:
         curl -o snapshot.zip '${{ github.event.client_payload.signedURL }}'
 
     - name: Unzip Snapshot
-      run: unzip -o snapshot.zip -d snapshot
+      run: unzip -o snapshot.zip -d new_snapshot
       
     - name: Clean up existing zip files
       run: |
           echo "Removing existing zip files..."
           rm -f *.zip || true  # The || true ensures that this command doesn't fail the workflow if no zip files are found
+
+    - name: Set Git Configurations
+      run: |
+        git config --global user.email "you.zouhairi@gmail.com"
+        git config --global user.name "YussefZ"
+
+    - name: Pull Latest Changes
+      run: |
+        git pull origin main
         
+    - name: Replace Snapshot Directory
+      run: |
+        rm -rf snapshot || true # Remove the old snapshot directory if it exists, ignoring errors if it does not
+        mv new_snapshot snapshot # Rename the newly unzipped snapshot directory
+
     - name: Create New Branch and Push
       env:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
-        git config --global user.email "you.zouhairi@gmail.com"
-        git config --global user.name "YussefZ"
         git checkout -b new-branch-${{ github.event.client_payload.id }}
         git add .
-        git commit -m "Add new snapshot"
-        # Including the PAT in the repository URL for authentication
+        git commit -m "Update snapshot with new changes"
         echo "Setting remote URL with PAT..."
         git remote set-url origin https://x-access-token:${REPO_ACCESS_TOKEN}@github.com/Yussefz/snapshot-release.git
         echo "Attempting to push to the repository..."
@@ -59,4 +70,3 @@ jobs:
           gh pr merge "$PR_NUMBER" --auto --merge
         else
           echo "PR not found or cannot be merged automatically."
-        fi
