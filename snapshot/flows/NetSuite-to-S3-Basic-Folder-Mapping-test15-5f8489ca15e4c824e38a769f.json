@@ -1,0 +1,26 @@
+{
+  "_id": "5f8489ca15e4c824e38a769f",
+  "name": "NetSuite to S3 (Basic Folder Mapping) - test15",
+  "pageGenerators": [
+    {
+      "_exportId": "5f8489c923c33b7ceca1ebb4",
+      "skipRetries": false
+    }
+  ],
+  "pageProcessors": [
+    {
+      "type": "import",
+      "_importId": "5f848b634a514b6abdbfe04a",
+      "responseMapping": {
+        "fields": [
+          {
+            "extract": "_json",
+            "generate": "r_fileInfo"
+          }
+        ],
+        "lists": []
+      }
+    }
+  ],
+  "_flowGroupingId": "6467c5d5b72b624632c12c5a"
+}
