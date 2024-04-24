@@ -19,7 +19,8 @@
       "recordType": "item",
       "searchId": "163",
       "useSS2Restlets": false,
-      "restletVersion": "suitebundle"
+      "restletVersion": "suitebundle",
+      "markExportedBatchSize": 100
     },
     "distributed": {
       "executionContext": [],
