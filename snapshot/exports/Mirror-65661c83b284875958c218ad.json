@@ -12,7 +12,12 @@
     "requestMediaType": "json",
     "successMediaType": "json",
     "errorMediaType": "json",
-    "formType": "rest"
+    "formType": "rest",
+    "response": {
+      "twoDArray": {
+        "doNotNormalize": true
+      }
+    }
   },
   "adaptorType": "HTTPExport"
 }
